@@ -30,10 +30,25 @@ http://localhost:8080
 a aplicação deverá exibir na tela a mensagem: "Up and running!"
 
 ###Para pesquisar um CEP
-a url:
+Exemplo de url para pesquisa de :
 http://localhost:8080/addresses/01001-000 
 
-é um exemplo de CEP válido.
+é um exemplo de CEP válido. O retorno será:
+
+    {
+		"cep": "01001001",
+		"street": "Praça da Sé - lado par",
+		"neighborhood": "Sé",
+		"city": "São Paulo",
+		"state": "SP"
+	}
+
+Caso o CEP pesquisado seja inválido, será retornado o status 412 (Pré-condition failed)
+junto ao conteúdo:
+
+	{
+		"errorMessage": "CEP inválido"
+	}
 
 **Observação:**
 Como a aplicação foi desenvolvida com fins de teste, apenas os CEPs do município de São Paulo estão disponíveis.
