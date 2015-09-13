@@ -1,23 +1,29 @@
 package br.com.missaci.cep.domain;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+
+/**
+ * 
+ * Address location representation
+ * 
+ * @author Mateus <mateus.missaci@gmail.com>
+ *
+ */
+
 @Entity
-@Table(name="ADDRESS")
+@Table(name="ADDRESSES")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 public class Address {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	@Embedded
-	private CEP cep;
+	private String cep;
 	
 	@Column(name="STREET", length=255)
 	private String street;
@@ -33,52 +39,44 @@ public class Address {
 	
 	protected Address(){}
 	
-	public Address(Long id){
-		this.id = id;
+	public Address(CEP cep){
+		this.cep = cep.getValue();
 	}
 
 	public CEP getCep() {
-		return cep;
-	}
-
-	public void setCep(CEP cep) {
-		this.cep = cep;
+		return new CEP(this.cep);
 	}
 
 	public String getStreet() {
 		return street;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
 	public String getNeighborhood() {
 		return neighborhood;
-	}
-
-	public void setNeighborhood(String neighborhood) {
-		this.neighborhood = neighborhood;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getState() {
 		return state;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
 }

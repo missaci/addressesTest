@@ -4,28 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import br.com.missaci.cep.infrastructure.StringUtilities;
+import br.com.missaci.cep.infrastructure.exceptions.InvalidCepException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import br.com.missaci.cep.domain.exceptions.InvalidCepException;
-import br.com.missaci.cep.infrastructure.StringUtilities;
-
-@Embeddable
+/**
+ * 
+ * CEP representation.
+ * To be instantiated, the CEP passed must
+ * be valid, according to:
+ * - Number of digits (8 digits + 1 hyphen optional);
+ * - The first five digits must be grater then 1000 since it is the smallest possible value of a CEP;
+ * 
+ * @author Mateus <mateus.missaci@gmail.com>
+ *
+ */
 public class CEP {
 
-	@Column(name="CEP", length=8)
 	private final String value;
 	
-	@Transient
 	private List<CEP> alternatives;
-	
-	//Used to avoid problems with JPA
-	protected CEP(){
-		value = null;
-	}
 	
 	@JsonCreator
 	public CEP(String cep){
@@ -45,14 +44,25 @@ public class CEP {
 		
 	}
 
+	/**
+	 * @return the value without hyphen
+	 */
 	public String getValue() {
 		return value;
 	}
 	
+	/**
+	 * @return the formatted value (with hyphen)
+	 */
 	public String getFormattedValue() {
 		return value.substring(0, 5).concat("-").concat(value.substring(5));
 	}
 	
+	/**
+	 * @return a list of CEPs created according to
+	 * the rule of substitution of the last non zero right digit
+	 * to zero.
+	 */
 	public List<CEP> getAlternativeCepValues(){
 		if(alternatives == null){
 			alternatives = new ArrayList<CEP>();

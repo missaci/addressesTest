@@ -1,9 +1,10 @@
 package br.com.missaci.cep.domain;
 
 import static org.hamcrest.core.Is.*;
+
 import org.junit.Test;
 
-import br.com.missaci.cep.domain.exceptions.InvalidCepException;
+import br.com.missaci.cep.infrastructure.exceptions.InvalidCepException;
 import static org.junit.Assert.*;
 
 public class CEPTest {

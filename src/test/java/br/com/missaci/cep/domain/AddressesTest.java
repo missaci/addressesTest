@@ -26,14 +26,12 @@ public class AddressesTest {
 		Address address = addresses.find(validCEP);
 		
 		assertNotNull(address);
-		assertNotNull(address.getId());
+		assertNotNull(address.getCep());
 		assertEquals(address.getCep().getValue(), "09760480");
 	}
 	
 	private void mockAddresses(){
-		Address address = new Address(1l);
-		address.setCep(validCEP);
-		
+		Address address = new Address(validCEP);
 		when(addresses.find(validCEP)).thenReturn(address);
 	}
 	
