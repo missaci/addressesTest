@@ -31,7 +31,7 @@ a aplicação deverá exibir na tela a mensagem: "Up and running!"
 
 ###Para pesquisar um CEP
 Exemplo de url para pesquisa de :
-http://localhost:8080/addresses/01001-000 
+http://localhost:8080/addresses/01001-001 
 
 é um exemplo de CEP válido. O retorno será:
 
