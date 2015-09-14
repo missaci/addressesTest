@@ -10,3 +10,7 @@ spring:
             naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
         database: H2
         show-sql: true
+        
+#<-- Server configuration -->
+server:
+    port: 8080
